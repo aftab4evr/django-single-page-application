@@ -123,12 +123,12 @@ def getDashboardPage(queary):
     #         </ul>
     #     </nav>
     # </div>'''
-    #     else:
-    #         table+='''<tr>
-    #                         <td colspan="8" style="text-align:center">No data found.</td>
-    #                     </tr>
-    #                 </tbody>
-    #             </table>
-    #         </div>
-    #         '''
+    else:
+        table+='''<tr>
+                        <td colspan="8" style="text-align:center">Data not found.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        '''
     return table

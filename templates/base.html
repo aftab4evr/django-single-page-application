@@ -48,12 +48,7 @@
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/popper.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'js/datepicker.js' %}"></script>
-  <script src="{% static 'js/bootstrap-multiselect.js' %}"></script>
   <script src="{% static 'js/common.js' %}"></script>
-  <script src="{% static 'js/notification.js' %}"></script>
-  <script src="{% static 'js/datepicker.js' %}"></script>
   <script>
     $(document).ready(function () {
         // window.history.pushState("", "", '/dashboard');
@@ -62,7 +57,6 @@
     });
 
     window.addEventListener('popstate', function (event) {
-      // console.log("history state",history.state.id)
       $("#overlay").fadeIn(300);
       if(history.state){
         if(history.state.id=='add'){
@@ -87,7 +81,6 @@
               type: "GET",
               url: "/delete-record/"+uuid,
               success: function (data) {
-                  console.log('Done')
                   $("#deleteUserModal_"+uuid).modal('hide');
                   handelHomePageData()
               },
@@ -158,7 +151,6 @@
       const phone = $("#id_mobile").val()
       const gender = $("input[name='gender']:checked").val();
       if (isNumberValid && isNameValid && isEmailValid){
-        console.log(name,email,phone,gender)
         $("#overlay").fadeIn(300);
 
         $.ajax(
@@ -174,13 +166,11 @@
 
                     },
                     success: function (data) {
-                         console.log(data)
                          $("#id_error").hide()
                         window.history.pushState("", "", '/');
                         handelHomePageData()
                     },
                     error: function (jqXHR, textStatuse, errorThrown) {
-                      console.log('error',jqXHR.responseJSON.response_message);
                       $("#id_error").html(jqXHR.responseJSON.response_message).show()
                       $("#overlay").fadeOut(300);
                     }
@@ -196,7 +186,6 @@
       const email = $("#id_email").val()
       const phone = $("#id_mobile").val()
       const gender = $("input[name='gender']:checked").val();
-      console.log(name,email,phone,gender)
 
       if (isNumberValid && isNameValid && isEmailValid){
         $("#overlay").fadeIn(300);
@@ -215,14 +204,12 @@
 
                     },
                     success: function (data) {
-                         console.log(data)
                         window.history.pushState("", "", '/');
                         handelHomePageData()
 
 
                     },
                     error: function (jqXHR, textStatuse, errorThrown) {
-                      console.log('error',jqXHR.responseJSON);
                       $("#id_error").html("Something wen wrong.").show()
                       $("#overlay").fadeOut(300);
                     }

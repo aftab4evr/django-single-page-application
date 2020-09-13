@@ -44,8 +44,8 @@ def getEditRecordPage(instance):
 
                      <div class="col-md-12">
                         <div class="form-group row">
-                           <label class="col-md-4 col-8 d-flex align-items-center fontbold">Gender:</label>
-                           <div class="col-md-8 col-8 d-flex align-items-center">
+                           <label class="col-md-6 col-4 d-flex align-items-center fontbold">Gender:</label>
+                           <div class="col-md-9 col-8 d-flex align-items-center">
                             <label>
                             <input type="radio" name="gender" id="male" value="Male" checked/>Male
                             </label>

@@ -41,7 +41,7 @@ def getViewDetailPage(instance):
 
                      <div class="col-md-12">
                         <div class="form-group row">
-                           <label class="col-md-4 col-8 d-flex align-items-center fontbold">Gender:</label>
+                           <label class="col-md-4 col-4 d-flex align-items-center fontbold">Gender:</label>
                            <div class="col-md-8 col-8 d-flex align-items-center">
                             <label>'''+ str(instance.gender)+'''</label>
 
