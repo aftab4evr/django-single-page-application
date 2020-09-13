@@ -1,0 +1,97 @@
+@media (max-width:1440px) {
+	.container-common{max-width:1140px;}
+}
+@media (max-width:1199px) {
+	header nav.navbar{padding:0 15px;}
+	.footerInner {padding: 15px 15px;}
+}
+
+@media (max-width:1024px) {
+	.container-common{max-width:100%;}
+	header{height:70px; padding-left:70px;}
+	header nav.navbar{height:70px; padding:0px 15px;}
+	.logo.navbar-brand{max-width:70px;}
+	.left_content_box{margin-left:-320px; position: absolute; height: 100%; z-index: 10;}
+	.left_content_box.show_slide{margin-left: 0;}
+	.menu_toggle_box{opacity:1; visibility:visible; backface-visibility:visible;}
+}
+
+@media (max-width:767px) {
+.contact-form{margin-bottom:20px;}
+.footer-content {padding-left: 0;}
+.footer-log {position: static;text-align: center;margin-bottom:20px;}
+.email-body {padding: 20px;}
+.menu-box{max-width:calc(100% - 40px);}
+.user_top_box {max-width:100%;padding-left:45px;}
+.user_top_box img{width:35px;height:35px;top:12px;}
+.user_top_box .dropdown-menu{right:0;}
+.innerTabContent .tab-pane{padding:15px;}
+.main-container{padding-top:35px;}
+.fullNavWrapper{padding:0 15px;margin-bottom:15px;border:none;}
+.nav-tabs.navStyle1{display:block!important;}
+.nav-tabs.navStyle1 .nav-link{font-size:14px;padding:10px;border-radius:0;border:1px solid #ddd;}
+.nav-tabs.navStyle1 li{width:100%;}
+.nav-tabs.navStyle1 li + li{margin-top:10px;}
+.nav-tabs.navStyle1 .nav-link.active,
+.nav-tabs.navStyle1 .nav-link:hover,
+.nav-tabs.navStyle1 .nav-link:focus{border:1px solid #28c3b3;}
+.tokenList li{width:100%;float:none;}
+.priceSliderTop, .priceSliderBottom, .hardCap{max-width:100%;}
+.hardCap{margin-top:30px;}
+.biDirectionSign{margin:15px 0;}
+.sellInfoBox {margin:30px 0;}
+.tokenRemaining{font-size:12px;}
+.contentInvestmentbox .row.mb50{margin:0!important;}
+.global-modal .modal-body {padding: 15px;}
+/*.global-modal.modal.fade .modal-dialog{margin:0;}*/
+.email-logo ,.footer-log img{max-width: 45px;}
+.mail-content-section {padding: 15px 0;}
+.banner-txt{font-size:20px;}
+.social-icons-block p{padding-left:0;margin-top:10px;}
+.content-wrapper{padding:30px 0;min-height: auto;}
+.login-main-block {margin-bottom: 30px;}
+.login-body{padding:15px;}
+.login-body .tab-content {padding:15px 0;}
+.right_content_box{padding:10px;}
+}
+
+@media (max-width:480px) {
+.right_content_box{padding:5px;}
+.mail-title {font-size: 22px;}
+.banner-logo {position: static;text-align: center;margin-top: 15px;border-left: none;}
+.selected-banner-block {padding-right: 0;}
+.user_top_box strong{display:none;}
+.footerMenuList li a{font-size:13px;}
+}
+
+/* =========Mobile View End========= */
+
+@media(min-width:768px) and (max-width:991px){
+.fullNavWrapper .nav.navStyle1{max-width:720px;}	
+}
+
+
+@media(min-width:768px){
+/*.main-container {min-height: calc(100vh - 396px); margin-top:50px;}*/
+.sellInfoBox{margin-top:143px;}	
+.tokenRemaining{margin-top:83px;margin-bottom:0;}	
+}
+
+@media(min-width:768px) and (max-width:1023px){
+.innerTabContent .tab-pane{padding:15px;}
+.footerStyle h4{font-size:15px;}	
+.nav-tabs.navStyle1 .nav-link{font-size:13px;}
+}
+
+@media(min-width:1280px){
+.user_top_box .dropdown-menu{right:-64px;}	
+}
+
+
+@media(max-width:480px){
+
+.form-group label{font-size: 12px;}
+
+}
+
+
