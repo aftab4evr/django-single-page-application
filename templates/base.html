@@ -1,0 +1,238 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, width=device-width">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Data Management</title>
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'css/text-editor.css' %}" rel="stylesheet">
+  <link href="{% static 'css/global.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
+  <link href="{% static 'css/loader.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!-- Toastr -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</head>
+<body class="logged">
+  <div id="overlay">
+    <div class="cv-spinner">
+      <span class="spinner"></span>
+    </div>
+  </div>
+  <main class="main-container">
+    <div class="container-common">
+        {% block content %}{% endblock %}
+    </div>
+  </main>
+
+  <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+  <script src="{% static 'js/popper.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/datepicker.js' %}"></script>
+  <script src="{% static 'js/bootstrap-multiselect.js' %}"></script>
+  <script src="{% static 'js/common.js' %}"></script>
+  <script src="{% static 'js/notification.js' %}"></script>
+  <script src="{% static 'js/datepicker.js' %}"></script>
+  <script>
+    $(document).ready(function () {
+        // window.history.pushState("", "", '/dashboard');
+       
+       handelHomePageData()
+    });
+
+    window.addEventListener('popstate', function (event) {
+      // console.log("history state",history.state.id)
+      $("#overlay").fadeIn(300);
+      if(history.state){
+        if(history.state.id=='add'){
+        handlPages('/get-add-record')
+      }else if(history.state.id == 'edit'){
+        handlPages('/get-edit-record/'+history.state.uuid)
+      }
+      else if(history.state.id == 'view'){
+        handlPages('/get-view-record/'+history.state.uuid)
+      }
+      }
+      else{
+        handlPages('/get-record')
+      }
+      }, false);
+    function handelDelete(uuid){
+      $("#overlay").fadeIn(300);
+      $("#deleteUserModal_"+uuid).modal('hide');
+      $('.modal-backdrop').removeClass('modal-backdrop fade show')
+      $.ajax(
+          {
+              type: "GET",
+              url: "/delete-record/"+uuid,
+              success: function (data) {
+                  console.log('Done')
+                  $("#deleteUserModal_"+uuid).modal('hide');
+                  handelHomePageData()
+              },
+
+          })
+       
+
+        }
+    function handelHomePageData(){
+      $("#overlay").fadeIn(300);
+
+      $("#root").empty();
+      handlPages('/get-record')
+    }
+
+    function switchAddrecordPage(){
+      $("#overlay").fadeIn(300);
+
+      $("#root").empty();
+        history.pushState({
+            id: 'add'
+        }, 'Add Record', '/add');
+      handlPages('/get-add-record')
+    }
+
+    function switchEditPage(uuid){
+      $("#overlay").fadeIn(300);
+
+      $("#root").empty();
+      history.pushState({
+            id: 'edit',
+            uuid:uuid
+        }, 'Edit Record', '/edit/'+uuid);
+        handlPages('/get-edit-record/'+uuid)
+    }
+
+
+    function switchViewPage(uuid){
+      $("#overlay").fadeIn(300);
+
+      $("#root").empty();
+        history.pushState({
+            id: 'view',
+            uuid:uuid
+        }, 'Add Record', '/view/'+uuid);
+        handlPages('/get-view-record/'+uuid)
+    }
+
+    function handlPages(url){
+      $("#root").empty();
+      $.ajax({
+          type: "GET",
+          url: url,
+          success: function (data) {
+            $("#root").append(data.data);
+            $("#overlay").fadeOut(300);
+          },
+
+      })
+
+    }
+
+
+    function handelAddRecord(){
+
+      const name = $("#id_name").val()
+      const email = $("#id_email").val()
+      const phone = $("#id_mobile").val()
+      const gender = $("input[name='gender']:checked").val();
+      if (isNumberValid && isNameValid && isEmailValid){
+        console.log(name,email,phone,gender)
+        $("#overlay").fadeIn(300);
+
+        $.ajax(
+                {
+                    type: "POST",
+                    url: "/add-record",
+                    data:{
+                      name:name,
+                      email:email,
+                      mobile:phone,
+                      gender:gender,
+                      csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    },
+                    success: function (data) {
+                         console.log(data)
+                         $("#id_error").hide()
+                        window.history.pushState("", "", '/');
+                        handelHomePageData()
+                    },
+                    error: function (jqXHR, textStatuse, errorThrown) {
+                      console.log('error',jqXHR.responseJSON.response_message);
+                      $("#id_error").html(jqXHR.responseJSON.response_message).show()
+                      $("#overlay").fadeOut(300);
+                    }
+
+                })
+
+      }
+    }
+
+
+    function handelEditRecord(uuid){
+      const name = $("#id_name").val()
+      const email = $("#id_email").val()
+      const phone = $("#id_mobile").val()
+      const gender = $("input[name='gender']:checked").val();
+      console.log(name,email,phone,gender)
+
+      if (isNumberValid && isNameValid && isEmailValid){
+        $("#overlay").fadeIn(300);
+
+        $.ajax(
+                {
+                    type: "POST",
+                    url: "/edit-record",
+                    data:{
+                      name:name,
+                      uuid:uuid,
+                      email:email,
+                      mobile:phone,
+                      gender:gender,
+                      csrfmiddlewaretoken: '{{ csrf_token }}'
+
+                    },
+                    success: function (data) {
+                         console.log(data)
+                        window.history.pushState("", "", '/');
+                        handelHomePageData()
+
+
+                    },
+                    error: function (jqXHR, textStatuse, errorThrown) {
+                      console.log('error',jqXHR.responseJSON);
+                      $("#id_error").html("Something wen wrong.").show()
+                      $("#overlay").fadeOut(300);
+                    }
+
+                })
+
+      }
+    }
+
+
+  </script>
+</body>
+</html>

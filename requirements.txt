@@ -1,0 +1,6 @@
+djangorestframework
+django==2.2.8
+django-heroku
+gunicorn
+psycopg2==2.8.5
+psycopg2-binary==2.8.4
