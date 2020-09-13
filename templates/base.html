@@ -54,7 +54,6 @@
         // window.history.pushState("", "", '/dashboard');
       const url = window.location.pathname.split('/')[1]
       const uuid=window.location.pathname.split('/')[2]
-      console.log()
        if(url == 'add'){
         handlPages('/get-add-record')
        }else if(url == 'edit' && uuid !=' '){
@@ -62,6 +61,9 @@
        } else if(url == 'view' && uuid !=' '){
         handlPages('/get-view-record/'+uuid)
        }else{
+        history.pushState({
+                id: 'homepage',
+            }, 'Get Record', '/');
         handlPages('/get-record')
          
        }
@@ -83,7 +85,7 @@
 
         }
       }else{
-        console.log('else')
+
         handlPages('/get-record')
       }
     }, false);
