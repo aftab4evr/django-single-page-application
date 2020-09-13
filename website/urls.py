@@ -18,6 +18,10 @@ urlpatterns = [
     url(r'^add-record', AddRecordView.as_view()),
     url(r'^edit-record', EditRecordView.as_view()),
 
+    url(r'^.*',HandelAnyUrl.as_view()),
+
+
+
 
 
 ]

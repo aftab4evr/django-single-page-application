@@ -82,3 +82,8 @@ class GetViewRecordView(View):
         user = UserManagement.objects.get(uuid=uuid)
         data = getViewDetailPage(user)
         return JsonResponse({'data':data})
+
+
+class HandelAnyUrl(View):
+    def get(self,request):        
+        return render(request,'index.html')

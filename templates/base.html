@@ -52,26 +52,41 @@
   <script>
     $(document).ready(function () {
         // window.history.pushState("", "", '/dashboard');
-       
-       handelHomePageData()
+      const url = window.location.pathname.split('/')[1]
+      const uuid=window.location.pathname.split('/')[2]
+      console.log()
+       if(url == 'add'){
+        handlPages('/get-add-record')
+       }else if(url == 'edit' && uuid !=' '){
+        handlPages('/get-edit-record/'+uuid)
+       } else if(url == 'view' && uuid !=' '){
+        handlPages('/get-view-record/'+uuid)
+       }else{
+        handlPages('/get-record')
+         
+       }
     });
 
     window.addEventListener('popstate', function (event) {
       $("#overlay").fadeIn(300);
       if(history.state){
         if(history.state.id=='add'){
-        handlPages('/get-add-record')
-      }else if(history.state.id == 'edit'){
-        handlPages('/get-edit-record/'+history.state.uuid)
-      }
-      else if(history.state.id == 'view'){
-        handlPages('/get-view-record/'+history.state.uuid)
-      }
-      }
-      else{
+          handlPages('/get-add-record')
+        }else if(history.state.id == 'edit'){
+          handlPages('/get-edit-record/'+history.state.uuid)
+        }
+        else if(history.state.id == 'view'){
+          handlPages('/get-view-record/'+history.state.uuid)
+        }
+        else if(history.state.id == 'homepage'){
+        handlPages('/get-record')
+
+        }
+      }else{
+        console.log('else')
         handlPages('/get-record')
       }
-      }, false);
+    }, false);
     function handelDelete(uuid){
       $("#overlay").fadeIn(300);
       $("#deleteUserModal_"+uuid).modal('hide');
@@ -138,7 +153,16 @@
             $("#root").append(data.data);
             $("#overlay").fadeOut(300);
           },
+         
+          error: function (jqXHR, textStatuse, errorThrown) {
+            alert('Invaid uuid')
+            history.pushState({
+                id: 'homepage',
+            }, 'Get Record', '/');
+            $("#overlay").fadeOut(300);
 
+            handlPages('/get-record')
+            }
       })
 
     }
