@@ -1,1 +1,15 @@
 /env
+/assets
+/db.json
+/db.sqlite3
+__pycache__
+media
+*.pyc
+*.log
+.idea/
+.DS_Store
+googleauthqr
+.vscode
+.tempimage/
+.log/
+/ico
