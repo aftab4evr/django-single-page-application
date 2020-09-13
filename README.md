@@ -22,4 +22,6 @@ TODO: This project is basically based on single page application development in 
     After activating an environment we need to install all the required packages.
 
     $ pip install -r requirements.txt
-
+## Migrations and Deployment
+    $ python manage.py migrate
+    $ python manage.py runserver
