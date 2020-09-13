@@ -10,3 +10,5 @@ class AddRecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserManagement
         fields = ("name",'mobile','email','gender')
+
+        
