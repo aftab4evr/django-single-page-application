@@ -17,7 +17,11 @@
   <link href="{% static 'css/text-editor.css' %}" rel="stylesheet">
   <link href="{% static 'css/global.css' %}" rel="stylesheet">
   <link href="{% static 'css/mobile.css' %}" rel="stylesheet">
-  <link href="{% static 'css/loader.css' %}" rel="stylesheet">
+  <link href="{% static 'css/spinner.css' %}" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -39,22 +43,131 @@
       <span class="spinner"></span>
     </div>
   </div>
+  <header class="landing_header header_fixed_menu">
+    <div class="menu_toggle_box" style="display: none;">
+      <button type="button" class="btn btn-menu" id="toggle_slide_button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    <div class="container-common">
+      <nav class="navbar navbar-expand-md  align-items-center">
+        <a class="navbar-brand logo" >
+          <img src="{% static 'images/bitcoin_icon.png' %}" alt="Logo" />
+        </a>
+
+        <div class="menu-box ml-auto">
+          <div class="user_top_box clearfix">
+            <img src="{% static 'images/user.png' %}" class="img-circle" alt="User Image">
+            <strong class="user_top_name">Aftab Hussain</strong>
+            <div class="dropdown-menu head-drop-down">
+              <div class="dropDownProfileBox">
+                <h4>aftab4evr</h4>
+                <p>aftab4evr786gmail.com</p>
+              </div>
+              <a class="dropdown-item" style="cursor: pointer;" onclick="handelMenuAddRecord()">Add record</a>
+              <a class="dropdown-item" style="cursor: pointer;">Your Account</a>
+              <a class="dropdown-item" href="#logOutModal" data-toggle="modal">Logout</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+  </header>
+  <!-- Header End -->
+
+  <!-- main Start -->
   <main class="main-container">
     <div class="container-common">
+      <div class="main_content_box">
+        <div class="left_content_box" id="toggle_slide">
+          <div class="left_menu_box" id="accordion">
+            <div class="user-panel clearfix">
+              <div class="pull-left image">
+                <img src="{% static 'images/user.png' %}" class="img-circle" alt="User Image">
+                <a href="#" class="online-icon"><i class="fa fa-circle text-success"></i></a>
+              </div>
+              <div class="pull-left info d-flex align-items-center flex-wrap">
+                <h4 class="w-100 d-block mb-0">Aftab Hussin</h4>
+                <h5>Admin</h5>
+              </div>
+            </div>
+            <div class="card card_menu">
+              <div class="card-header" id="heading3">
+                <h5 class="mb-0">
+                  <a class="btn btn-link" id="dashboard" onclick="handeMenuDashboard()"><i
+                      class="fas fa-exchange-alt"></i>Dashboard</a>
+                </h5>
+              </div>
+            </div>
+            <div class="card card_menu">
+              <div class="card-header" id="heading3">
+                <h5 class="mb-0">
+                  <a class="btn btn-link" id="add-record" onclick="handelMenuAddRecord()"><i class="fas fa-users"></i>Add Record</a>
+                </h5>
+              </div>
+            </div>
+      
+            <div class="card card_menu">
+              <div class="card-header" id="heading5">
+                <h5 class="mb-0">
+                  <a class="btn btn-link " href="#logOutModal" data-toggle="modal"><i
+                      class="fas fa-power-off"></i>Logout</a>
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
         {% block content %}{% endblock %}
+      </div>
     </div>
   </main>
+  <div class="modal fade global-modal" id="logOutModal">
+    <div class="modal-dialog max-WT-450">
+      <div class="modal-content">
+        <div class="modal-header justify-content-center pb0">
+          <h4 class="modal-title pb0">Logout</h4>
+        </div>
+        <hr>
+        <div class="modal-body pt0">
+          <div class="row align-items-center min-ht-200">
+            <div class="col">
+              <div class="form-box">
+                <div class="form-group text-center">
+                  <img src="{% static 'images/l1.png' %}" height="100"
+                    width="100" alt="images" />
+                  <p class="mTB30 font-16">Are you sure you want to logout?</p>
+                </div>
+                <div class="action-btn text-center">
+                  <a  class="btn max-WT-100 btnGreen mr5 pTB10">Yes</a>
+                  <button type="button" class="btn max-WT-100 btnGray mt0 pTB10" data-dismiss="modal">No
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
   <script src="{% static 'js/popper.min.js' %}"></script>
   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'js/datepicker.js' %}"></script>
+  <script src="{% static 'js/bootstrap-multiselect.js' %}"></script>
   <script src="{% static 'js/common.js' %}"></script>
+  <script src="{% static 'js/notification.js' %}"></script>
+  <script src="{% static 'js/datepicker.js' %}"></script>
+
   <script>
     $(document).ready(function () {
-        // window.history.pushState("", "", '/dashboard');
+      $("#overlay").fadeIn(300);
       const url = window.location.pathname.split('/')[1]
       const uuid=window.location.pathname.split('/')[2]
        if(url == 'add'){
+        $("#add-record").addClass("active");
         handlPages('/get-add-record')
        }else if(url == 'edit' && uuid !=' '){
         handlPages('/get-edit-record/'+uuid)
@@ -64,6 +177,7 @@
         history.pushState({
                 id: 'homepage',
             }, 'Get Record', '/');
+        $("#dashboard").addClass("active");
         handlPages('/get-record')
          
        }
@@ -197,9 +311,15 @@
                         handelHomePageData()
                     },
                     error: function (jqXHR, textStatuse, errorThrown) {
-                      $("#id_error").html(jqXHR.responseJSON.response_message).show()
+                      if(jqXHR.responseJSON.response_message){
+                        $("#id_error").html(jqXHR.responseJSON.response_message).show()
+                      }else{
+                        $("#id_error").html("something went wrong").show()
+                        
+                      }
                       $("#overlay").fadeOut(300);
-                    }
+                    },
+                    
 
                 })
 
@@ -244,7 +364,29 @@
 
       }
     }
+function getUlr(){
+  return window.location.pathname.split('/')[1]
+}
+function handeMenuDashboard(){
+  if (getUlr() !=''){
+    $(".active").removeClass("active");
+    $("#dashboard").addClass("active");
+    history.pushState({
+                id: 'homepage',
+            }, 'Get Record', '/');
+    handlPages('/get-record')
+    
+  }
+}
 
+function handelMenuAddRecord(){
+  if (getUlr() !='add'){
+    $(".active").removeClass("active");
+    $("#add-record").addClass("active");
+    switchAddrecordPage()
+  }
+
+}
 
   </script>
 </body>

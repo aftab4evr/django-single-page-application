@@ -855,7 +855,7 @@ td .btn-sm {
 .left_content_box.show_slide{margin-left:-320px;}
 .menu_toggle_box{opacity:1; visibility:visible; backface-visibility:visible;}
 
-/* .right_content_box{padding-left: 340px;} */
+.right_content_box{padding-left: 340px;}
 .right_content_box.right_slide{padding-left:20px;}
 .setuptab-block .input-blockbox {padding-left: 0;}
 .setuptab-block ul.nav.nav-tabs{background:#ebebeb;border:none;}

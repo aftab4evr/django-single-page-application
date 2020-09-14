@@ -12,12 +12,13 @@ from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+from .forms import AddUserForm
+from .models import UserManagement
 from .string_to_html.viewpage import getViewDetailPage
 from .string_to_html.editpage import getEditRecordPage
 from .string_to_html.addpage import getAddRecordPage
 from .string_to_html.dashboardpage import getDashboardPage
 from .serializers import AddRecordSerializer
-from .models import UserManagement
 
 
 
@@ -47,15 +48,20 @@ class GetRecordView(View):
         return JsonResponse({'data':data})
 
 
-class AddRecordView(APIView):
+class AddRecordView(View):
     def post(self,request):
-        params = request.data
+        print(request.POST)
+        params = request.POST
         if UserManagement.objects.filter(email=params['email']) or UserManagement.objects.filter(mobile=params['mobile']):
             return JsonResponse({'response_message':'Email or phone no exist.'},status=400)
-        serializer = AddRecordSerializer(data=params)
-        serializer.is_valid()
-        serializer.save()
-        return JsonResponse({})
+        user_form = AddUserForm(request.POST)   
+        if user_form.is_valid():
+            user_form.save()
+            return JsonResponse({})
+        # serializer = AddRecordSerializer(data=params)
+        # serializer.is_valid()
+        # serializer.save()
+        # return JsonResponse({})
 
 class EditRecordView(APIView):
     def post(self,request):
